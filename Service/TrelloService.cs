@@ -34,7 +34,7 @@ public class DataService
 
     public List<Board> GetBoards()
     {
-        return db.Boards.Include(b => b.Todos).ToList();
+        return db.Boards.Include(b => b.Todos).ThenInclude(t => t.User).ToList();
        
     }
 
@@ -59,5 +59,11 @@ public class DataService
         db.SaveChanges();
         return "wuhu";
     }
-
+    public string DeleteTodo(long id)
+    {
+        Todo objectt = db.Todos.Find(id);
+        db.Todos.Remove(objectt);
+        db.SaveChanges();
+        return "Den er væk";
+    }
 }

@@ -95,5 +95,10 @@ app.MapPost("/api/boards", (DataService service,Todo[] data) =>
     return new { message = result };
 });
 
+app.MapDelete("/api/todo/{id}", (DataService service, long id) =>
+{
+    service.DeleteTodo(id);
+});
+
 app.Run();
 record NewBoardData(List<Todo> Todos);
